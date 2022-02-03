@@ -3,10 +3,11 @@
     "scope": "typescript",
     "prefix": "template",
     "body": [
-      "import { NS } from '@ns'",
+      "import { NS } from '@ns';",
+      "import { CONSTANTS } from '/lib/Constants';",
       "",
       "export async function main(ns : NS) : Promise<void> {",
-      "\t//",
+      "\t //",
       "}"
     ]
   },
@@ -15,10 +16,22 @@
     "prefix": "autocomplete",
     "body": [
       "// eslint-disable-next-line @typescript-eslint/no-unused-vars",
-      "export function autocomplete(data : ServerData, args : string[]) : string[] {",
+      "export function autocomplete(data : AutocompleteData, args : string[]) : string[] {",
       "\treturn [...data.servers]",
       "}"
     ],
     "description": "autocomplete"
+  },
+  "flags": {
+    "scope": "typescript",
+    "prefix": "flags",
+    "body": [
+      "\tconst flags = ns.flags(_.concat(CONSTANTS.ARGS, []));",
+      "",
+      "\tif (flags.d || flags['debug']) {",
+      "\t\tns.tail();",
+      "\t}"
+    ],
+    "description": "flags"
   }
 }
